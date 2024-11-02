@@ -19,3 +19,16 @@ export const selectFavoritePokemons = createSelector(
         return pokemon.filter(el => favorite.includes(el.id));
     }
 );
+
+// 중복된 포켓몬 종류 배열 제거
+export const selectGenus = createSelector(
+    state => state.pokemon.data,
+    pokemon => [...new Set(pokemon.map(pokemon => pokemon.genus))]
+);
+
+// 선택한 포켓몬 종류 배열
+export const filterdSelectGenus = genus =>
+    createSelector(
+        state => state.pokemon.data,
+        pokemon => pokemon.filter(pokemon => pokemon.genus === genus)
+    );

@@ -6,6 +6,7 @@ const Input = () => {
             <span>🔍</span>
             <input
                 type="text"
+                placeholder="포켓몬을 검색하세요"
                 className="border-b border-[darkgray] px-2"
                 onChange={e => {
                     navigate(`/search?pokemon=${e.target.value}`);

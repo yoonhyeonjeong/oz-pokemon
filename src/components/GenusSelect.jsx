@@ -1,9 +1,9 @@
 import {useSelector} from "react-redux";
 import {useState} from "react";
+import {selectGenus} from "../RTK/selector";
 import {useNavigate} from "react-router-dom";
 const GenusSelect = () => {
-    const pokemonData = useSelector(state => state.pokemon);
-    const uniqueGenus = [...new Set(pokemonData.data.map(pokemon => pokemon.genus))]; //중복제거
+    const uniqueGenus = useSelector(selectGenus);
     const [selectedGenus, setSelectedGenus] = useState("");
     const navigate = useNavigate();
     const handleGenusChange = event => {
