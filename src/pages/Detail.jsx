@@ -17,6 +17,11 @@ const DetailContainer = styled.div`
         font-size: 28px;
         margin-bottom: 10px;
     }
+    .genus {
+        font-size: 20px;
+        padding-bottom: 10px;
+        color: #4285f4;
+    }
     .description {
         white-space: pre-wrap;
         text-align: center;
@@ -38,6 +43,7 @@ const Detail = () => {
                         {pokemon.name}
                         <FavoriteButton pokemonId={Number(pokemonId)} />
                     </div>
+                    <p className="genus">{pokemon.genus}</p>
                     <div className="description">{pokemon.description}</div>
                     <FlipCard
                         front={pokemon.front}

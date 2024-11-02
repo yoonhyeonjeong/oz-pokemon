@@ -8,6 +8,8 @@ import Search from "./pages/Search";
 import Favorite from "./pages/Favorite";
 import Detail from "./pages/Detail";
 import Input from "./components/Input";
+import GenusSelect from "./components/GenusSelect";
+import Select from "./pages/Select";
 
 function App() {
     const dispatch = useDispatch();
@@ -22,6 +24,7 @@ function App() {
                 <Link to={"/"}>메인</Link>
                 <Link to={"favorite"}>찜목록</Link>
                 <Input />
+                <GenusSelect />
             </nav>
             <main className="flex flex-wrap gap-[20px] justify-center pt-[20px]">
                 <Routes>
@@ -40,6 +43,10 @@ function App() {
                     <Route
                         path={"/favorite"}
                         element={<Favorite />}
+                    ></Route>
+                    <Route
+                        path={"/select"}
+                        element={<Select />}
                     ></Route>
                 </Routes>
             </main>

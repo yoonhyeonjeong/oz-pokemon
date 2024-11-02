@@ -9,11 +9,11 @@ export const fetchMultiplePokemonById = createAsyncThunk(
         const fetchApi = async pokemonId => {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
             const data = await response.json();
-
             const pokemonData = {
                 id: pokemonId,
                 name: data.names.find(el => el.language.name === "ko")?.name || "Unknown",
                 description: data.flavor_text_entries.find(el => el.language.name === "ko")?.flavor_text || "No description",
+                genus: data.genera[1].genus,
                 front: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
                 back: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemonId}.png`,
             };
