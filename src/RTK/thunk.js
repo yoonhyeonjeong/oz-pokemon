@@ -7,16 +7,23 @@ export const fetchMultiplePokemonById = createAsyncThunk(
 
         // 개별 포켓몬 데이터를 가져오는 함수
         const fetchApi = async pokemonId => {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
-            const data = await response.json();
+            const response1 = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+            const data1 = await response1.json();
+            // 포켓몬 스탯 데이터
+            const response2 = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+            const data2 = await response2.json();
+
             const pokemonData = {
                 id: pokemonId,
-                name: data.names.find(el => el.language.name === "ko")?.name || "Unknown",
-                description: data.flavor_text_entries.find(el => el.language.name === "ko")?.flavor_text || "No description",
-                genus: data.genera[1].genus,
+                name: data1.names.find(el => el.language.name === "ko")?.name || "Unknown",
+                description: data1.flavor_text_entries.find(el => el.language.name === "ko")?.flavor_text || "No description",
+                genus: data1.genera[1].genus,
+                baseStat: data2.stats.map(el => el.base_stat),
+                statName: data2.stats.map(el => el.stat.name),
                 front: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
                 back: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemonId}.png`,
             };
+            console.log(pokemonData);
             return pokemonData;
         };
 

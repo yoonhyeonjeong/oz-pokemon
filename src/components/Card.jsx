@@ -19,7 +19,6 @@ const CardContainer = styled.section`
 const Card = memo(({pokemon}) => {
     const [isImageLoading, setIsImageLoading] = useState(true);
     const navigate = useNavigate();
-    console.log("card", pokemon.id);
     return (
         <CardContainer
             onClick={() => {

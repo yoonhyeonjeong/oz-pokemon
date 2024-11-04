@@ -1,9 +1,11 @@
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectPokemonById} from "../RTK/selector";
+import {useState} from "react";
 import styled from "styled-components";
 import FavoriteButton from "../components/FavoriteButton";
 import FlipCard from "../components/FlipCard";
+import Modal from "../components/Modal";
 
 const DetailContainer = styled.div`
     display: flex;
@@ -29,12 +31,18 @@ const DetailContainer = styled.div`
     img {
         width: 200px;
     }
+    .detail-btn {
+        padding-top: 15px;
+    }
 `;
 
 const Detail = () => {
     const {pokemonId} = useParams(); //문자열로 들어옴
     const pokemon = useSelector(selectPokemonById(Number(pokemonId)));
-    console.log(pokemon);
+    const [isModal, setIsModal] = useState(false);
+    const ModalOpen = () => {
+        setIsModal(prev => !prev);
+    };
     return (
         <DetailContainer>
             {pokemon ? (
@@ -49,6 +57,21 @@ const Detail = () => {
                         front={pokemon.front}
                         back={pokemon.back}
                     />
+                    <button
+                        className="detail-btn"
+                        onClick={() => {
+                            ModalOpen();
+                        }}
+                    >
+                        자세히 보기
+                    </button>
+                    {isModal && (
+                        <Modal
+                            pokemon={pokemon}
+                            setIsModal={setIsModal}
+                            isModal={isModal}
+                        />
+                    )}
                 </>
             ) : (
                 <p>포켓몬을 찾아올 수 없습니다</p>
