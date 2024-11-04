@@ -23,7 +23,6 @@ export const fetchMultiplePokemonById = createAsyncThunk(
                 front: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
                 back: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemonId}.png`,
             };
-            console.log(pokemonData);
             return pokemonData;
         };
 
