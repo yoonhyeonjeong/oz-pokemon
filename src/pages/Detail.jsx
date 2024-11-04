@@ -6,7 +6,7 @@ import styled from "styled-components";
 import FavoriteButton from "../components/FavoriteButton";
 import FlipCard from "../components/FlipCard";
 import Modal from "../components/Modal";
-
+import Toast from "../components/Toast";
 const DetailContainer = styled.div`
     display: flex;
     border: 1px solid gray;
@@ -39,17 +39,22 @@ const DetailContainer = styled.div`
 const Detail = () => {
     const {pokemonId} = useParams(); //문자열로 들어옴
     const pokemon = useSelector(selectPokemonById(Number(pokemonId)));
+    // 모달
     const [isModal, setIsModal] = useState(false);
     const ModalOpen = () => {
         setIsModal(prev => !prev);
     };
+    const {isVisible} = useSelector(state => state.toast);
     return (
         <DetailContainer>
             {pokemon ? (
                 <>
                     <div className="name">
                         {pokemon.name}
-                        <FavoriteButton pokemonId={Number(pokemonId)} />
+                        <FavoriteButton
+                            pokemonId={Number(pokemonId)}
+                            pokemonName={pokemon.name}
+                        />
                     </div>
                     <p className="genus">{pokemon.genus}</p>
                     <div className="description">{pokemon.description}</div>
@@ -76,6 +81,7 @@ const Detail = () => {
             ) : (
                 <p>포켓몬을 찾아올 수 없습니다</p>
             )}
+            {isVisible && <Toast />}
         </DetailContainer>
     );
 };

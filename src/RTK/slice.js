@@ -25,7 +25,7 @@ export const pokemonSlice = createSlice({
 
 export const favoriteSlice = createSlice({
     name: "favorite",
-    initialState: [1, 2, 3, 4],
+    initialState: [],
     reducers: {
         addToFavorite(state, action) {
             state.push(action.payload.pokemonId);
@@ -33,6 +33,26 @@ export const favoriteSlice = createSlice({
         removeFromFavorite(state, action) {
             const index = state.indexOf(action.payload.pokemonId);
             if (index !== -1) state.splice(index, 1);
+        },
+    },
+});
+
+// 토스트 슬라이스
+export const toastSlice = createSlice({
+    name: "toast",
+    initialState: {
+        isVisible: false,
+        message: "",
+        delay: 3000,
+    },
+    reducers: {
+        showToast(state, action) {
+            state.message = action.payload;
+            state.isVisible = true;
+        },
+        hideToast(state, action) {
+            state.message = action.payload;
+            state.isVisible = false;
         },
     },
 });

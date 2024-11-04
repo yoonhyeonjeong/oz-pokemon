@@ -9,7 +9,7 @@ const Search = () => {
     const param = searchParams.get("pokemon");
     const reg = getRegExp(param);
     const pokemon = useSelector(selectPokemonByRegExp(reg));
-    console.log(pokemon);
+
     return (
         <>
             {pokemon.map(el => (

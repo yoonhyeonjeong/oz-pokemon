@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 import Card from "../components/Card";
 const Favorite = () => {
     const pokemon = useSelector(selectFavoritePokemons);
-    console.log(pokemon);
     return (
         <>
             {pokemon && pokemon.length > 0 ? (

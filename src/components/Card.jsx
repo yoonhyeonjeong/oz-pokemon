@@ -36,7 +36,10 @@ const Card = memo(({pokemon}) => {
             />
             <div>
                 <span>{pokemon.name}</span>
-                <FavoriteButton pokemonId={pokemon.id} />
+                <FavoriteButton
+                    pokemonId={pokemon.id}
+                    pokemonName={pokemon.name}
+                />
             </div>
         </CardContainer>
     );

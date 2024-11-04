@@ -1,12 +1,13 @@
 import {useSelector} from "react-redux";
 import Card from "../components/Card";
-
+import Toast from "../components/Toast";
 const Main = () => {
-    const pokemonData = useSelector(state => state.pokemon);
+    const {data} = useSelector(state => state.pokemon);
+    const {isVisible} = useSelector(state => state.toast);
     return (
         <>
-            {pokemonData.data && pokemonData.data.length > 0 ? (
-                pokemonData.data.map(el => (
+            {data && data.length > 0 ? (
+                data.map(el => (
                     <Card
                         pokemon={el}
                         key={el.id}
@@ -15,6 +16,7 @@ const Main = () => {
             ) : (
                 <div>로딩중입니다.</div>
             )}
+            {isVisible && <Toast />}
         </>
     );
 };
