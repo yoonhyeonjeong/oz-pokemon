@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import FavoriteButton from "./FavoriteButton";
+import {useState, memo} from "react";
 const CardContainer = styled.section`
     width: 150px;
     display: flex;
@@ -15,15 +16,22 @@ const CardContainer = styled.section`
         width: 120px;
     }
 `;
-const Card = ({pokemon}) => {
+const Card = memo(({pokemon}) => {
+    const [isImageLoading, setIsImageLoading] = useState(true);
     const navigate = useNavigate();
+    console.log("card", pokemon.id);
     return (
         <CardContainer
             onClick={() => {
                 navigate(`/detail/${pokemon.id}`);
             }}
         >
+            {isImageLoading ? <div className="w-[120px] h-[120px] leading-[120px] text-center">로딩중...</div> : null}
             <img
+                onLoad={() => {
+                    setIsImageLoading(false);
+                }}
+                style={{display: isImageLoading ? "none" : "block"}}
                 src={pokemon.front}
                 alt={pokemon.name}
             />
@@ -33,6 +41,6 @@ const Card = ({pokemon}) => {
             </div>
         </CardContainer>
     );
-};
+});
 
 export default Card;

@@ -1,15 +1,16 @@
-import {useEffect} from "react";
+import {useEffect, lazy, Suspense} from "react";
 import "./App.scss";
 import {useDispatch} from "react-redux";
 import {fetchMultiplePokemonById} from "./RTK/thunk";
 import {Route, Routes, Link} from "react-router-dom";
-import Main from "./pages/Main";
-import Search from "./pages/Search";
-import Favorite from "./pages/Favorite";
-import Detail from "./pages/Detail";
-import Input from "./components/Input";
-import GenusSelect from "./components/GenusSelect";
-import Select from "./pages/Select";
+
+const Main = lazy(() => import("./pages/Main"));
+const Detail = lazy(() => import("./pages/Detail"));
+const Search = lazy(() => import("./pages/Search"));
+const Favorite = lazy(() => import("./pages/Favorite"));
+const Select = lazy(() => import("./pages/Select"));
+const Input = lazy(() => import("./components/Input"));
+const GenusSelect = lazy(() => import("./components/GenusSelect"));
 
 function App() {
     const dispatch = useDispatch();
@@ -27,28 +28,30 @@ function App() {
                 <GenusSelect />
             </nav>
             <main className="flex flex-wrap gap-[20px] justify-center pt-[20px]">
-                <Routes>
-                    <Route
-                        path={"/"}
-                        element={<Main />}
-                    ></Route>
-                    <Route
-                        path={"/detail/:pokemonId"}
-                        element={<Detail />}
-                    ></Route>
-                    <Route
-                        path={"/search"}
-                        element={<Search />}
-                    ></Route>
-                    <Route
-                        path={"/favorite"}
-                        element={<Favorite />}
-                    ></Route>
-                    <Route
-                        path={"/select"}
-                        element={<Select />}
-                    ></Route>
-                </Routes>
+                <Suspense fallback={<div>로딩중...</div>}>
+                    <Routes>
+                        <Route
+                            path={"/"}
+                            element={<Main />}
+                        ></Route>
+                        <Route
+                            path={"/detail/:pokemonId"}
+                            element={<Detail />}
+                        ></Route>
+                        <Route
+                            path={"/search"}
+                            element={<Search />}
+                        ></Route>
+                        <Route
+                            path={"/favorite"}
+                            element={<Favorite />}
+                        ></Route>
+                        <Route
+                            path={"/select"}
+                            element={<Select />}
+                        ></Route>
+                    </Routes>
+                </Suspense>
             </main>
         </>
     );
