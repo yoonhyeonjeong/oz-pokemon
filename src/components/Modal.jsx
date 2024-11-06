@@ -71,17 +71,17 @@ const Modal = ({pokemon, setIsModal, isModal}) => {
             </button>
             <div className="modal-body">
                 <p>{pokemon.name} 스탯</p>
-                {/* <ul>
-                    {pokemon.baseStat.map((stat, index) => (
-                        <li key={index}>
-                            {pokemon.statName[index]} : {stat}
-                        </li>
-                    ))}
-                </ul> */}
                 <RadarChart
                     stats={stats}
                     statNames={statNames}
                 />
+                <ul>
+                    {stats.map((stat, index) => (
+                        <li key={index}>
+                            {statNames[index]} : {stat}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </ModalContainer>
     );
